@@ -6,6 +6,9 @@
       </v-img>
       <v-card-text class="white--text body-2 px-0">
         Hi 👋🏼 I'm Charles, a Javascript Developer. I write tutorials for JavaScript || Web Development and teach basic coding concepts.
+        <router-link to="/admin">
+          Post
+        </router-link>
       </v-card-text>
       <v-card-actions>
         <a class="twitter-follow-button" href="https://twitter.com/youthcodetech" data-size="large">

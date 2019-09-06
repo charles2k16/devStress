@@ -2,39 +2,36 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Posts from './components/Posts'
 import SinglePost from './components/SinglePost'
+import AdminContainer from './containers/AdminContainer'
 
 Vue.use(Router)
 
 let routes = [
   {
     path: '/',
+    redirect: '/posts',
+    name: 'Home',
     component: {
-      render (c) { return c('router-view') }
+      render (c) { return c('router-view')}
     },
     children: [
       {
-        path: '/',
+        path: 'posts',
         name: 'Posts',
-        component: Posts
+        component: Posts,
       },
       {
         path: 'post',
-        redirect: '/post/view',
         name: 'Post',
-        component: {
-          render (c) { return c('router-view') }
-        },
-        children: [
-          {
-            path: 'view',
-            name: 'Post Read',
-            component: SinglePost
-          }
-        ]
-      }
+        component: SinglePost
+      },
     ]
   },
-  // { path: '/admin', component: require('./components/Users.vue')}
+  {
+    path: '/admin',
+    name: 'Admin',
+    component: AdminContainer
+  }
 ]
 
 const router =  new Router({

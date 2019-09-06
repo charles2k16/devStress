@@ -4,14 +4,14 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>Dev-Stress</title>
+    <title>Admin</title>
     <link rel="stylesheet" href="/css/app.css">
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat|Raleway:400,900&display=swap" rel="stylesheet">
   </head>
   <body>
     <div id="app">
-      <main-container></main-container>     
+      <admin-container></admin-container>
     </div>
 
     <script type="text/javascript" src="/js/app.js"></script>

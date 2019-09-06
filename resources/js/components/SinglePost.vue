@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-progress-linear indeterminate :active="showProgress" color="yellow darken-2"></v-progress-linear>
-    <v-card id="theme" class="my-1" flat>
+    <v-card id="theme" class="my-1" flat v-show="!showProgress">
       <v-card-title class="textTitle white--text">{{post.title}}</v-card-title>
       <v-card-text class="subTitle white--text mt-2">{{post.sub_content}}</v-card-text>
       <v-card-title class="font-weight-bold body-2 white--text mt-3">
