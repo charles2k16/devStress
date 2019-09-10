@@ -6,7 +6,7 @@
         <v-app-bar-nav-icon @click.stop="drawerRight = !drawerRight"></v-app-bar-nav-icon>
         <v-toolbar-title class="font-weight-thin caption">Talk is cheap. Show me the code</v-toolbar-title>
         <v-spacer></v-spacer>
-        <v-app-bar-nav-icon></v-app-bar-nav-icon>
+        <v-icon>mdi-account-arrow-right-outline</v-icon>
       </v-app-bar>
 
       <v-content>

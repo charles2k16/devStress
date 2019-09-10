@@ -2,7 +2,9 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Posts from './components/Posts'
 import SinglePost from './components/SinglePost'
-import AdminContainer from './containers/AdminContainer'
+import Dashboard from './views/Dashboard'
+import PostsAdmin from './views/PostsAdmin'
+import Categories from './views/Categories'
 
 Vue.use(Router)
 
@@ -29,8 +31,28 @@ let routes = [
   },
   {
     path: '/admin',
+    redirect: '/dashboard',
     name: 'Admin',
-    component: AdminContainer
+    component: {
+      render (c) { return c('router-view') }
+    },
+    children: [
+      {
+        path: '/dashboard',
+        name: 'Dashboard',
+        component: Dashboard
+      },
+      {
+        path: '/admin/posts',
+        name: 'Posts',
+        component: PostsAdmin
+      },
+      {
+        path: '/admin/categories',
+        name: 'Categories',
+        component: Categories
+      },
+    ]
   }
 ]
 
