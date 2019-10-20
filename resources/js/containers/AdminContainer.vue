@@ -1,5 +1,5 @@
 <template>
-  <v-app id="app">
+  <v-app id="appAdmin">
     <v-navigation-drawer app width="250" fixed permanent 
       :mini-variant.sync="mini" id="navDrawer" dark>
       <v-list>
@@ -80,7 +80,7 @@ export default {
   #navDrawer, #navBar {
     background-color:#283142
   }
-  #app {
+  #appAdmin {
     background-color: #1B2530;
   }
 </style>

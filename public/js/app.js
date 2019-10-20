@@ -6933,7 +6933,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n#navDrawer, #navBar {\n  background-color:#283142\n}\n#app {\n  background-color: #1B2530;\n}\n", ""]);
+exports.push([module.i, "\n#navDrawer, #navBar {\n  background-color:#283142\n}\n#appAdmin {\n  background-color: #1B2530;\n}\n", ""]);
 
 // exports
 
@@ -38959,7 +38959,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "v-app",
-    { attrs: { id: "app" } },
+    { attrs: { id: "appAdmin" } },
     [
       _c(
         "v-navigation-drawer",
