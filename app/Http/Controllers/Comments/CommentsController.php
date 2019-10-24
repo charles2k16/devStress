@@ -27,30 +27,18 @@ class CommentsController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
+      $rules = [
+        'name' => 'required',
+        'comment' => 'required',
+        'post_id' => 'required',
+      ];
+      $this->validate($request, $rules);
+  
+      $data = $request->all();
+  
+      $comment = Comment::create($data);
+      return ['comment' => $comment];
+     
     }
 
     /**
@@ -61,6 +49,8 @@ class CommentsController extends Controller
      */
     public function destroy($id)
     {
-        //
+      $comment = Comment::findOrFail($id);
+      $comment->delete();
+      return ['comment' => $comment]; 
     }
 }

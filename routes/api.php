@@ -23,12 +23,10 @@ Route::resource('users.posts', 'User\UserPostController', ['except' => ['create'
 
 // Posts
 Route::resource('posts', 'Post\PostController', ['except' => ['create', 'edit']]);
-Route::resource('posts.category', 'Post\PostCategoryController', ['only' => ['index', 'update', 'destroy']]);
-
 
 // Categories
 Route::resource('categories', 'Category\CategoryController', ['except' => ['create', 'edit']]);
 Route::resource('categories.posts', 'Category\CategoryPostController', ['only' => ['index']]);
 
 // Comments
-Route::resource('comments', 'Comments\CommentsController', ['except' => ['create', 'edit']]);
+Route::resource('comments', 'Comments\CommentsController', ['except' => ['create', 'edit', 'update', 'show']]);
