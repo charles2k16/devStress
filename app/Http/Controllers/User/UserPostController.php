@@ -16,7 +16,7 @@ class UserPostController extends Controller
    */
   public function index(User $user)
   {
-    $posts = $user->posts;
+    $posts = $user->posts()->with('category')->get();
     return ['posts' => $posts];
   }
 

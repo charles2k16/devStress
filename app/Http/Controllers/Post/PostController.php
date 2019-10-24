@@ -15,7 +15,7 @@ class PostController extends Controller
    */
   public function index()
   {
-    $posts = Post::with('categories')->get();
+    $posts = Post::with('category')->get();
     return ['posts' => $posts];
   }
 
@@ -62,7 +62,12 @@ class PostController extends Controller
    */
   public function update(Request $request, $id)
   {
-      //
+    $post = Post::findOrFail($id);
+    $this-> validate($request, [
+        'title' => 'string',
+    ]);
+    $post->update($request->all());
+    return ['post' => $post];
   }
 
   /**

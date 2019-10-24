@@ -31,7 +31,7 @@ class UserController extends Controller
     $rules = [
       'name' => 'required',
       'email' => 'required|email|unique:users',
-      'password' => 'required|min:6|confirmed'
+      'password' => 'required|min:6'
     ];
     // We validate the request and the rules
     $this->validate($request, $rules);
