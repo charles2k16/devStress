@@ -15,7 +15,7 @@ class PostController extends Controller
    */
   public function index()
   {
-    $posts = Post::all();
+    $posts = Post::with('categories')->get();
     return ['posts' => $posts];
   }
 
@@ -28,7 +28,17 @@ class PostController extends Controller
    */
   public function store(Request $request)
   {
-      //
+    $rules = [
+      'title' => 'required',
+      'sub_content' => 'required',
+      'content' => 'required',
+    ];
+    $this->validate($request, $rules);
+
+    $data = $request->all();
+
+    $post = Post::create($data);
+    return ['post' => $post];
   }
 
   /**

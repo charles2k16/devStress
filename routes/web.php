@@ -19,5 +19,5 @@ Route::get('/admin', function () {
   return view('admin');
 });
 
-Route::get('{path}', 'HomeController@index')->where( 'path', '([A-z]+)?' );
+// Route::get('{path}', 'HomeController@index')->where( 'path', '([A-z]+)?' );
 

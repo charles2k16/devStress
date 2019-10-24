@@ -5,37 +5,26 @@ import SinglePost from './components/SinglePost'
 import Dashboard from './views/Dashboard'
 import PostsAdmin from './views/PostsAdmin'
 import Categories from './views/Categories'
+import Admin from './containers/AdminContainer'
 
 Vue.use(Router)
 
 let routes = [
   {
     path: '/',
-    redirect: '/posts',
-    name: 'Home',
-    component: {
-      render (c) { return c('router-view')}
-    },
-    children: [
-      {
-        path: 'posts',
-        name: 'Posts',
-        component: Posts,
-      },
-      {
-        path: 'post',
-        name: 'Post',
-        component: SinglePost
-      },
-    ]
+    name: 'Posts',
+    component: Posts,
+  },
+  {
+    path: '/post',
+    name: 'Post',
+    component: SinglePost
   },
   {
     path: '/admin',
     redirect: '/dashboard',
     name: 'Admin',
-    component: {
-      render (c) { return c('router-view') }
-    },
+    component: Admin,
     children: [
       {
         path: '/dashboard',

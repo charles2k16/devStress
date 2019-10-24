@@ -33,6 +33,10 @@
             <v-icon>mdi-whatsapp</v-icon>
           </v-btn>
         </v-speed-dial>
+        <v-spacer></v-spacer>
+        <router-link to="/">
+        <v-button>Go Back Home</v-button>
+        </router-link>
       </v-card-actions>
     </v-card>
   </div>

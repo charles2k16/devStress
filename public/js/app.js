@@ -1984,7 +1984,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(__webpack_require__(/*! vue-momen
     showSinglePost: function showSinglePost(post) {
       console.log(post);
       this.$router.push({
-        path: 'post',
+        path: '/post',
         query: {
           id: post.id
         }
@@ -2007,6 +2007,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _api_posts__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../api/posts */ "./resources/js/api/posts.js");
+//
+//
+//
+//
 //
 //
 //
@@ -38923,6 +38927,15 @@ var render = function() {
                     1
                   )
                 ],
+                1
+              ),
+              _vm._v(" "),
+              _c("v-spacer"),
+              _vm._v(" "),
+              _c(
+                "router-link",
+                { attrs: { to: "/" } },
+                [_c("v-button", [_vm._v("Go Back Home")])],
                 1
               )
             ],
@@ -96349,6 +96362,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _views_Dashboard__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./views/Dashboard */ "./resources/js/views/Dashboard.vue");
 /* harmony import */ var _views_PostsAdmin__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./views/PostsAdmin */ "./resources/js/views/PostsAdmin.vue");
 /* harmony import */ var _views_Categories__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./views/Categories */ "./resources/js/views/Categories.vue");
+/* harmony import */ var _containers_AdminContainer__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./containers/AdminContainer */ "./resources/js/containers/AdminContainer.vue");
+
 
 
 
@@ -96359,31 +96374,17 @@ __webpack_require__.r(__webpack_exports__);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]);
 var routes = [{
   path: '/',
-  redirect: '/posts',
-  name: 'Home',
-  component: {
-    render: function render(c) {
-      return c('router-view');
-    }
-  },
-  children: [{
-    path: 'posts',
-    name: 'Posts',
-    component: _components_Posts__WEBPACK_IMPORTED_MODULE_2__["default"]
-  }, {
-    path: 'post',
-    name: 'Post',
-    component: _components_SinglePost__WEBPACK_IMPORTED_MODULE_3__["default"]
-  }]
+  name: 'Posts',
+  component: _components_Posts__WEBPACK_IMPORTED_MODULE_2__["default"]
+}, {
+  path: '/post',
+  name: 'Post',
+  component: _components_SinglePost__WEBPACK_IMPORTED_MODULE_3__["default"]
 }, {
   path: '/admin',
   redirect: '/dashboard',
   name: 'Admin',
-  component: {
-    render: function render(c) {
-      return c('router-view');
-    }
-  },
+  component: _containers_AdminContainer__WEBPACK_IMPORTED_MODULE_7__["default"],
   children: [{
     path: '/dashboard',
     name: 'Dashboard',

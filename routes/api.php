@@ -29,3 +29,6 @@ Route::resource('posts.category', 'Post\PostCategoryController', ['only' => ['in
 // Categories
 Route::resource('categories', 'Category\CategoryController', ['except' => ['create', 'edit']]);
 Route::resource('categories.posts', 'Category\CategoryPostController', ['only' => ['index']]);
+
+// Comments
+Route::resource('comments', 'Comments\CommentsController', ['except' => ['create', 'edit']]);

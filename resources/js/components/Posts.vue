@@ -54,7 +54,7 @@ export default {
     },
     showSinglePost(post) {
       console.log(post)
-      this.$router.push({ path: 'post', query: { id: post.id } })
+      this.$router.push({ path: '/post', query: { id: post.id } })
     } 
   }
 }
