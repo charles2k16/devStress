@@ -2,11 +2,12 @@
   <v-app id="app">
     <v-container grid-list-xl>
 
-      <v-app-bar clipped-right dark flat short id="themeBackground">
+      <v-app-bar clipped-right dark flat short app color="deep-purple accent-4" :collapse="!collapseOnScroll"
+        :collapse-on-scroll="collapseOnScroll">
         <v-app-bar-nav-icon @click.stop="drawerRight = !drawerRight"></v-app-bar-nav-icon>
         <v-toolbar-title class="font-weight-thin caption">Talk is cheap. Show me the code</v-toolbar-title>
         <v-spacer></v-spacer>
-        <v-icon>mdi-account-arrow-right-outline</v-icon>
+        <v-btn icon><v-icon>mdi-home</v-icon></v-btn>
       </v-app-bar>
 
       <v-content>
@@ -15,7 +16,7 @@
             <v-flex xs3>
               <Sidebar />
             </v-flex>
-            <v-flex xs9>
+            <v-flex xs9 class="overflow-y-auto">
               <router-view></router-view>
             </v-flex>
           </v-layout>
@@ -31,12 +32,12 @@ import Sidebar from './Sidebar'
 
 export default {
   components: {Sidebar},
-
   data: () => ({
     qoutesData: [
       'Talk is cheap. Show me the code', 
       'alex'
-    ]
+    ],
+    collapseOnScroll: true,
   }),
   methods: {
 

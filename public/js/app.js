@@ -1955,6 +1955,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(__webpack_require__(/*! vue-moment */ "./node_modules/vue-moment/dist/vue-moment.js"));
@@ -1963,8 +1966,13 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(__webpack_require__(/*! vue-momen
   data: function data() {
     return {
       posts: [],
+      editPostViews: {
+        id: null,
+        views: null
+      },
       page: 1,
-      transition: 'slide-y-reverse-transition'
+      transition: 'slide-y-reverse-transition',
+      color: ''
     };
   },
   created: function created() {
@@ -1982,12 +1990,19 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(__webpack_require__(/*! vue-momen
       });
     },
     showSinglePost: function showSinglePost(post) {
-      console.log(post);
-      this.$router.push({
-        path: '/post',
-        query: {
-          id: post.id
-        }
+      var _this2 = this;
+
+      this.editPostViews.id = post.id;
+      this.editPostViews.views = post.views += 1;
+      _api_posts__WEBPACK_IMPORTED_MODULE_1__["default"].updatePost(this.editPostViews).then(function () {
+        _this2.$router.push({
+          path: '/post',
+          query: {
+            id: post.id
+          }
+        });
+      })["catch"](function (errors) {
+        console.log(errors);
       });
     }
   }
@@ -2052,6 +2067,48 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(__webpack_require__(/*! vue-moment */ "./node_modules/vue-moment/dist/vue-moment.js"));
@@ -2063,8 +2120,15 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(__webpack_require__(/*! vue-momen
       post: [],
       showProgress: true,
       share: true,
+      sheet: false,
       transition: 'slide-y-reverse-transition'
     };
+  },
+  computed: {
+    checkComments: function checkComments() {
+      var c = this.post.comments;
+      return !Array.isArray(c) || !c.length;
+    }
   },
   created: function created() {
     this.postId = this.$route.query.id;
@@ -2074,7 +2138,6 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(__webpack_require__(/*! vue-momen
     init: function init() {
       var _this = this;
 
-      this.showProgress = true;
       _api_posts__WEBPACK_IMPORTED_MODULE_1__["default"].getPost(this.postId).then(function (response) {
         _this.showProgress = false;
         var postData = response.post;
@@ -2220,6 +2283,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -2227,7 +2291,8 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      qoutesData: ['Talk is cheap. Show me the code', 'alex']
+      qoutesData: ['Talk is cheap. Show me the code', 'alex'],
+      collapseOnScroll: true
     };
   },
   methods: {}
@@ -38625,6 +38690,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
+    { staticClass: "mb-5", staticStyle: { "max-height": "100vh" } },
     _vm._l(_vm.posts, function(post) {
       return _c(
         "v-card",
@@ -38685,17 +38751,10 @@ var render = function() {
                       ),
                       _vm._v(" "),
                       _c("span", { staticClass: "body-2 white--text" }, [
-                        _vm._v(
-                          _vm._s(
-                            _vm._f("moment")(
-                              post.updated_at,
-                              "from",
-                              "now",
-                              true
-                            )
-                          ) + " ago"
-                        )
-                      ])
+                        _vm._v(_vm._s(post.updated_at) + " ago")
+                      ]),
+                      _vm._v(" "),
+                      _c("v-spacer")
                     ],
                     1
                   )
@@ -38712,9 +38771,7 @@ var render = function() {
                     { staticClass: "font-weight-medium body-1 white--text" },
                     [
                       _vm._v(
-                        _vm._s(
-                          _vm._f("moment")(post.updated_at, "MMMM Do YYYY")
-                        )
+                        _vm._s(_vm._f("moment")(post.updated_at, "MMM Do YYYY"))
                       )
                     ]
                   ),
@@ -38725,7 +38782,28 @@ var render = function() {
                       staticClass: "text-center mt-3",
                       attrs: { "x-large": "" }
                     },
-                    [_c("v-btn", [_vm._v("Web")])],
+                    [
+                      _c(
+                        "v-chip",
+                        {
+                          attrs: {
+                            color:
+                              post.category.name == "Javascript"
+                                ? "yellow accent-3"
+                                : post.category.name == "Vue"
+                                ? "teal lighten-2"
+                                : "secondary"
+                          }
+                        },
+                        [
+                          _vm._v(
+                            "\n            " +
+                              _vm._s(post.category.name) +
+                              "\n          "
+                          )
+                        ]
+                      )
+                    ],
                     1
                   )
                 ],
@@ -38805,18 +38883,14 @@ var render = function() {
               _c("span", { staticClass: "cyan--text ml-2" }, [
                 _vm._v(
                   " " +
-                    _vm._s(
-                      _vm._f("moment")(_vm.post.created_at, "MMMM Do YYYY")
-                    )
+                    _vm._s(_vm._f("moment")(_vm.post.created_at, "MMM Do YYYY"))
                 )
               ]),
               _vm._v("\n      , last updated "),
               _c("span", { staticClass: "cyan--text ml-2" }, [
                 _vm._v(
                   " " +
-                    _vm._s(
-                      _vm._f("moment")(_vm.post.updated_at, "MMMM Do YYYY")
-                    )
+                    _vm._s(_vm._f("moment")(_vm.post.updated_at, "MMM Do YYYY"))
                 )
               ])
             ]
@@ -38837,10 +38911,10 @@ var render = function() {
                   staticClass: "mr-1",
                   attrs: { color: "cyan lighten-3", small: "" }
                 },
-                [_vm._v("mdi-heart")]
+                [_vm._v("mdi-eye")]
               ),
               _vm._v(" "),
-              _c("span", { staticClass: "caption mr-2 white--text" }, [
+              _c("span", { staticClass: "body-2 mr-2 white--text" }, [
                 _vm._v(_vm._s(_vm.post.views))
               ]),
               _vm._v(" "),
@@ -38940,7 +39014,168 @@ var render = function() {
               )
             ],
             1
-          )
+          ),
+          _vm._v(" "),
+          _c("br"),
+          _c("br"),
+          _vm._v(" "),
+          !_vm.checkComments
+            ? _c(
+                "div",
+                _vm._l(_vm.post.comments, function(comment) {
+                  return _c(
+                    "v-timeline",
+                    { key: comment.id, attrs: { dense: "" } },
+                    [
+                      _c(
+                        "v-timeline-item",
+                        {
+                          scopedSlots: _vm._u(
+                            [
+                              {
+                                key: "icon",
+                                fn: function() {
+                                  return [
+                                    _c(
+                                      "v-avatar",
+                                      { attrs: { color: "pink" } },
+                                      [
+                                        _c("span", {
+                                          staticClass: "white--text headline"
+                                        })
+                                      ]
+                                    )
+                                  ]
+                                },
+                                proxy: true
+                              }
+                            ],
+                            null,
+                            true
+                          )
+                        },
+                        [
+                          _vm._v(" "),
+                          _c(
+                            "v-card",
+                            { staticClass: "elevation-2" },
+                            [
+                              _c("v-card-title", { staticClass: "headline" }, [
+                                _vm._v(_vm._s(comment.name))
+                              ]),
+                              _vm._v(" "),
+                              _c("v-card-text", [
+                                _vm._v(
+                                  "\n              " +
+                                    _vm._s(comment.comment) +
+                                    "\n            "
+                                )
+                              ])
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                }),
+                1
+              )
+            : _c("div", { staticClass: "mx-4 pb-5" }, [
+                _c("span", { staticClass: "subTitle white--text" }, [
+                  _vm._v("No Comments "),
+                  _c("br"),
+                  _vm._v(" "),
+                  _c("span", { staticClass: "body-2" }, [
+                    _vm._v("Post a comment or add your contributions")
+                  ])
+                ]),
+                _vm._v(" "),
+                _c(
+                  "span",
+                  { staticStyle: { float: "right" } },
+                  [
+                    _c(
+                      "v-bottom-sheet",
+                      {
+                        attrs: { inset: "" },
+                        scopedSlots: _vm._u([
+                          {
+                            key: "activator",
+                            fn: function(ref) {
+                              var on = ref.on
+                              return [
+                                _c(
+                                  "v-btn",
+                                  _vm._g({}, on),
+                                  [
+                                    _c(
+                                      "v-icon",
+                                      {
+                                        attrs: {
+                                          left: "",
+                                          dark: "",
+                                          "x-small": ""
+                                        }
+                                      },
+                                      [_vm._v("mdi-comment-plus-outline")]
+                                    ),
+                                    _vm._v(" Post Comment\n            ")
+                                  ],
+                                  1
+                                )
+                              ]
+                            }
+                          }
+                        ]),
+                        model: {
+                          value: _vm.sheet,
+                          callback: function($$v) {
+                            _vm.sheet = $$v
+                          },
+                          expression: "sheet"
+                        }
+                      },
+                      [
+                        _vm._v(" "),
+                        _c(
+                          "v-sheet",
+                          {
+                            staticClass: "text-center",
+                            attrs: { height: "200px" }
+                          },
+                          [
+                            _c(
+                              "v-btn",
+                              {
+                                staticClass: "mt-6",
+                                attrs: { text: "", color: "error" },
+                                on: {
+                                  click: function($event) {
+                                    _vm.sheet = !_vm.sheet
+                                  }
+                                }
+                              },
+                              [_vm._v("close")]
+                            ),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "my-3" }, [
+                              _vm._v(
+                                "This is a bottom sheet using the inset prop"
+                              )
+                            ])
+                          ],
+                          1
+                        )
+                      ],
+                      1
+                    )
+                  ],
+                  1
+                )
+              ])
         ],
         1
       )
@@ -39167,7 +39402,10 @@ var render = function() {
                 dark: "",
                 flat: "",
                 short: "",
-                id: "themeBackground"
+                app: "",
+                color: "deep-purple accent-4",
+                collapse: !_vm.collapseOnScroll,
+                "collapse-on-scroll": _vm.collapseOnScroll
               }
             },
             [
@@ -39188,7 +39426,12 @@ var render = function() {
               _vm._v(" "),
               _c("v-spacer"),
               _vm._v(" "),
-              _c("v-icon", [_vm._v("mdi-account-arrow-right-outline")])
+              _c(
+                "v-btn",
+                { attrs: { icon: "" } },
+                [_c("v-icon", [_vm._v("mdi-home")])],
+                1
+              )
             ],
             1
           ),
@@ -39208,7 +39451,7 @@ var render = function() {
                       _vm._v(" "),
                       _c(
                         "v-flex",
-                        { attrs: { xs9: "" } },
+                        { staticClass: "overflow-y-auto", attrs: { xs9: "" } },
                         [_c("router-view")],
                         1
                       )
@@ -39252,6 +39495,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
+    { staticClass: "mb-5" },
     [
       _c(
         "v-card",
@@ -95777,6 +96021,14 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(axios__WEBPACK_IMPORTED_MODULE_1_
     })["catch"](function (error) {
       return Promise.reject(error);
     });
+  },
+  updatePost: function updatePost(post) {
+    var url = _config__WEBPACK_IMPORTED_MODULE_2__["default"].POSTS_URL + '/' + post.id;
+    return axios__WEBPACK_IMPORTED_MODULE_1___default.a.put(url, post).then(function (response) {
+      return Promise.resolve(response.data);
+    })["catch"](function (error) {
+      return Promise.reject(error);
+    });
   }
 });
 
@@ -96391,7 +96643,7 @@ var routes = [{
     component: _views_Dashboard__WEBPACK_IMPORTED_MODULE_4__["default"]
   }, {
     path: '/admin/posts',
-    name: 'Posts',
+    name: 'Posts Admin',
     component: _views_PostsAdmin__WEBPACK_IMPORTED_MODULE_5__["default"]
   }, {
     path: '/admin/categories',

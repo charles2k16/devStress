@@ -33,7 +33,7 @@ let routes = [
       },
       {
         path: '/admin/posts',
-        name: 'Posts',
+        name: 'Posts Admin',
         component: PostsAdmin
       },
       {

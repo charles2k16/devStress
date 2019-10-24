@@ -18,5 +18,11 @@ export default {
     return axios.get(url)
       .then((response) => Promise.resolve(response.data))
       .catch((error) => Promise.reject(error))
+  },
+  updatePost (post) {
+    let url = config.POSTS_URL + '/' + post.id
+    return axios.put(url, post)
+      .then((response) => Promise.resolve(response.data))
+      .catch((error) => Promise.reject(error))
   }
 }

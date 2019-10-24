@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="mb-5">
     <v-card flat id="themeBackground">
       <v-img class="white--text" height="200px" src="img/personal.jpg">
         <v-card-title class="align-end fill-height">Hello</v-card-title>

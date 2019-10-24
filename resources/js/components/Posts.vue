@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="mb-5" style="max-height:100vh">
     <v-card id="theme" class="my-1" v-for="post in posts" :key="post.id" flat>
       <v-layout wrap>
         <v-flex md9>
@@ -9,17 +9,20 @@
           <v-card-text class="subTitle white--text mt-2">{{post.sub_content}}</v-card-text>
           <v-card-actions>
             <v-icon class="mr-1" color="cyan lighten-3" small>mdi-eye</v-icon>
-          <span class="body-2 mr-2 white--text">{{post.views}}</span>
-          <span class="mr-1">·</span>
-          <v-icon class="mr-1" color="blue-grey lighten-5" small>mdi-timer</v-icon>
-          <span class="body-2 white--text">{{post.updated_at | moment("from", "now", true)}} ago</span>
+            <span class="body-2 mr-2 white--text">{{post.views}}</span>
+            <span class="mr-1">·</span>
+            <v-icon class="mr-1" color="blue-grey lighten-5" small>mdi-timer</v-icon>
+            <span class="body-2 white--text">{{post.updated_at}} ago</span>
+            <v-spacer></v-spacer>
           </v-card-actions>
         </v-flex>
       
         <v-flex md3>
-          <v-card-title class="font-weight-medium body-1 white--text">{{post.updated_at | moment("MMMM Do YYYY")}}</v-card-title>
+          <v-card-title class="font-weight-medium body-1 white--text">{{post.updated_at | moment("MMM Do YYYY")}}</v-card-title>
           <div class="text-center mt-3" x-large>
-            <v-btn>Web</v-btn>
+            <v-chip :color="post.category.name == 'Javascript' ? 'yellow accent-3' : (post.category.name == 'Vue') ? 'teal lighten-2' : 'secondary'">
+              {{post.category.name}}
+            </v-chip>
           </div>
         </v-flex>
       </v-layout>
@@ -37,8 +40,13 @@ export default {
   name: 'PostsComponent',
   data: () => ({
     posts: [],
+    editPostViews: {
+      id: null,
+      views: null 
+    },
     page: 1,
     transition: 'slide-y-reverse-transition',
+    color: ''
   }),
   created() {
     this.getPosts()
@@ -53,8 +61,12 @@ export default {
         .catch((errors) => console.log(errors))
     },
     showSinglePost(post) {
-      console.log(post)
-      this.$router.push({ path: '/post', query: { id: post.id } })
+      this.editPostViews.id = post.id
+      this.editPostViews.views = post.views += 1
+      postService.updatePost(this.editPostViews)
+        .then(() => { 
+          this.$router.push({ path: '/post', query: { id: post.id } }) 
+        }).catch((errors) => {console.log(errors)})
     } 
   }
 }
