@@ -7,10 +7,17 @@ Vue.use(axios)
 export default {
   name: 'categoryService',
 
-  getUsers () {
+  getCategories () {
     let url = config.CATEGORIES_URL
     return axios.get(url)
       .then((response) => Promise.resolve(response.data))
       .catch((error) => Promise.reject(error))
+  },
+
+  getCategoryPosts (categoryId) {
+    let url = config.CATEGORIES_URL  + '/' + categoryId + '/posts'
+    return axios.get(url)
+    .then((response) => Promise.resolve(response.data))
+    .catch((error) => Promise.reject(error))
   }
 }

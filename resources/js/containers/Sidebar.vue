@@ -2,13 +2,10 @@
   <div class="mb-5">
     <v-card flat id="themeBackground">
       <v-img class="white--text" height="200px" src="img/personal.jpg">
-        <v-card-title class="align-end fill-height">Hello</v-card-title>
+        <v-card-title class="align-end fill-height">Hello World</v-card-title>
       </v-img>
       <v-card-text class="white--text body-2 px-0">
         Hi 👋🏼 I'm Charles, a Javascript Developer. I write tutorials for JavaScript || Web Development and teach basic coding concepts.
-        <router-link to="/admin">
-          Post
-        </router-link>
       </v-card-text>
       <v-card-actions>
         <a class="twitter-follow-button" href="https://twitter.com/youthcodetech" data-size="large">
@@ -49,26 +46,11 @@
         </v-btn>
       </div>
       <v-divider></v-divider>
-
       <v-card-title class="align-end white--text font-weight-bold">Tutorial Tags</v-card-title>
       <div>
-        <v-chip class="ma-1" color="cyan" label small>
-          Express
-        </v-chip>
-        <v-chip class="ma-1" color="yellow accent-3" label small>
-          Javascript
-        </v-chip>
-        <v-chip class="ma-1" color="orange" label small>
-          Laravel
-        </v-chip>
-        <v-chip class="ma-1" color="primary" label small>
-          HTML & CSS
-        </v-chip>
-        <v-chip class="ma-1" color="cyan lighten-3" label small>
-          ReactNative
-        </v-chip>
-        <v-chip class="ma-1" color="teal lighten-2" label small>
-          Vue.js
+        <v-chip :color="getColor(category)" @click="getCategoryPosts(category)"
+          v-for="category in categories" :key="category.id" label small class="ma-1" >
+          {{category.name}}
         </v-chip>
       </div>
 
@@ -77,8 +59,42 @@
 </template>
 
 <script>
+import categoryService from '../api/categories'
+
 export default {
-  
+  name: 'sideBar',
+  data: () => ({
+    categories: []
+  }),
+  created () {
+    this.getCategories()
+  },
+  methods: {
+    getCategories () {
+      let self = this
+      categoryService.getCategories()
+        .then((response) => {
+          let categoryData = response.categories
+          self.categories = categoryData
+        })
+    },
+    getCategoryPosts (cat) {
+      this.$router.push({ path: '/tags', query: { id: cat.id, title: cat.name } }) 
+    },
+    getColor (c) {
+      if (c.name == 'Vue') {
+        return 'teal lighten-2'
+      } else if (c.name == 'Laravel') {
+        return 'orange'
+      } else if (c.name == 'Javascript') {
+        return 'yellow accent-3'
+      } else if (c.name == 'Node') {
+        return 'deep-purple accent-4'
+      } else if (c.name == 'React Native') {
+        return 'primary'
+      }
+    }
+  }
 }
 </script>
 

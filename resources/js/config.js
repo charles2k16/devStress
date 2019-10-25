@@ -13,5 +13,6 @@ const API_URL = getApiUrl();
 export default {
   USERS_URL: API_URL + 'users',
   POSTS_URL: API_URL + 'posts',
-  CATEGORIES_URL: API_URL + 'categories'
+  CATEGORIES_URL: API_URL + 'categories',
+  COMMENTS_URL: API_URL + 'comments'
 }

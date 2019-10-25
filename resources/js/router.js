@@ -1,7 +1,10 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+
 import Posts from './components/Posts'
 import SinglePost from './components/SinglePost'
+import CategoryPost from './components/CategoryPost'
+
 import Dashboard from './views/Dashboard'
 import PostsAdmin from './views/PostsAdmin'
 import Categories from './views/Categories'
@@ -19,6 +22,11 @@ let routes = [
     path: '/post',
     name: 'Post',
     component: SinglePost
+  },
+  {
+    path: '/tags',
+    name: 'Category Posts',
+    component: CategoryPost
   },
   {
     path: '/admin',

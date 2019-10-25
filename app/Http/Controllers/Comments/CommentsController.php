@@ -29,6 +29,7 @@ class CommentsController extends Controller
     {
       $rules = [
         'name' => 'required',
+        'alphabet' => 'required',
         'comment' => 'required',
         'post_id' => 'required',
       ];

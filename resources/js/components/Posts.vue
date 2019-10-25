@@ -20,7 +20,7 @@
         <v-flex md3>
           <v-card-title class="font-weight-medium body-1 white--text">{{post.updated_at | moment("MMM Do YYYY")}}</v-card-title>
           <div class="text-center mt-3" x-large>
-            <v-chip :color="post.category.name == 'Javascript' ? 'yellow accent-3' : (post.category.name == 'Vue') ? 'teal lighten-2' : 'secondary'">
+            <v-chip :color="post.category.name == 'Javascript' ? 'yellow accent-3' : (post.category.name == 'Vue') ? 'teal lighten-2' : (post.category.name == 'Laravel') ? 'orange' : 'secondary'">
               {{post.category.name}}
             </v-chip>
           </div>
@@ -40,10 +40,6 @@ export default {
   name: 'PostsComponent',
   data: () => ({
     posts: [],
-    editPostViews: {
-      id: null,
-      views: null 
-    },
     page: 1,
     transition: 'slide-y-reverse-transition',
     color: ''
@@ -61,12 +57,7 @@ export default {
         .catch((errors) => console.log(errors))
     },
     showSinglePost(post) {
-      this.editPostViews.id = post.id
-      this.editPostViews.views = post.views += 1
-      postService.updatePost(this.editPostViews)
-        .then(() => { 
-          this.$router.push({ path: '/post', query: { id: post.id } }) 
-        }).catch((errors) => {console.log(errors)})
+      this.$router.push({ path: '/post', query: { id: post.id, title: post.title } }) 
     } 
   }
 }
