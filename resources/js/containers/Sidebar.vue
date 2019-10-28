@@ -89,7 +89,7 @@ export default {
       } else if (c.name == 'Javascript') {
         return 'yellow accent-3'
       } else if (c.name == 'Node') {
-        return 'deep-purple accent-4'
+        return 'purple accent-3'
       } else if (c.name == 'React Native') {
         return 'primary'
       }

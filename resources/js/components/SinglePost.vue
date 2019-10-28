@@ -9,9 +9,7 @@
         , last updated <span class="cyan--text ml-2"> {{post.updated_at | moment("MMM Do YYYY")}}</span> 
       </v-card-title>
       <v-divider></v-divider>
-      <v-card-text class="white--text">
-        {{post.content}}
-      </v-card-text>
+      <v-card-text class="white--text" v-html="post.content"></v-card-text>
       <v-card-actions>
         <v-icon class="mr-1" color="cyan lighten-3" small>mdi-eye</v-icon>
         <span class="body-2 mr-2 white--text">{{post.views}}</span>
@@ -49,18 +47,21 @@
               <v-icon left dark x-small>mdi-comment-plus-outline</v-icon> Post Comment
               </v-btn>
             </template>
-            <v-sheet height="300px" class="px-4 py-3">
+            <v-sheet height="320px" class="px-4 py-3">
               <v-form ref="commentsForm" v-model="valid" lazy-validation>
                 <v-text-field v-model="commentsForm.name" :counter="15"
                   label="First name" required :rules="rules.name">
                 </v-text-field>
                 <v-textarea v-model="commentsForm.comment" label="Comment"
                   autofocus auto-grow :rules="rules.comment">
-                </v-textarea>
+                </v-textarea> <br>
                 <v-btn color="deep-purple accent-4" dark block @click="postComment" :loading="btnLoading">Post</v-btn>
               </v-form>
             </v-sheet>
           </v-bottom-sheet>
+        </span>
+        <span style="float:right" class="white--text mr-2">
+          <h5>{{post.comments.length}} Comments</h5>
         </span>
         <!-- Comments Section -->
         <v-timeline dense v-for="comment in post.comments" :key="comment.id">
@@ -90,7 +91,7 @@
               <v-icon left dark x-small>mdi-comment-plus-outline</v-icon> Post Comment
               </v-btn>
             </template>
-            <v-sheet height="300px" class="px-4 py-3">
+            <v-sheet height="320px" class="px-4 py-3">
               <v-form ref="commentsForm" v-model="valid" lazy-validation>
                 <v-text-field v-model="commentsForm.name" :counter="15"
                   label="First name" required :rules="rules.name">

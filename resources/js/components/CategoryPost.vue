@@ -21,7 +21,7 @@
         <v-flex md3>
           <v-card-title class="font-weight-medium body-1 white--text">{{post.updated_at | moment("MMM Do YYYY")}}</v-card-title>
           <div class="text-center mt-3" x-large>
-            <v-chip :color="post.category.name == 'Javascript' ? 'yellow accent-3' : (post.category.name == 'Vue') ? 'teal lighten-2' : (post.category.name == 'Laravel') ? 'orange' : 'secondary'">
+            <v-chip :color="getColor(post.category.name)">
               {{post.category.name}}
             </v-chip>
           </div>
@@ -68,6 +68,19 @@ export default {
     updateRoute () {
       this.categoryId = this.$route.query.id
       this.getPosts()
+    },
+    getColor (c) {
+      if (c == 'Vue') {
+        return 'teal lighten-2'
+      } else if (c == 'Laravel') {
+        return 'orange'
+      } else if (c == 'Javascript') {
+        return 'yellow accent-3'
+      } else if (c == 'Node') {
+        return 'purple accent-3'
+      } else if (c == 'React Native') {
+        return 'primary'
+      }
     }
   }
 }

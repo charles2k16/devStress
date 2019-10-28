@@ -7,7 +7,7 @@
         <v-app-bar-nav-icon @click.stop="drawerRight = !drawerRight"></v-app-bar-nav-icon>
         <v-toolbar-title class="font-weight-thin caption">Talk is cheap. Show me the code</v-toolbar-title>
         <v-spacer></v-spacer>
-        <v-btn icon><v-icon>mdi-home</v-icon></v-btn>
+        <v-btn icon router to="/"><v-icon>mdi-home</v-icon></v-btn>
       </v-app-bar>
 
       <v-content>
@@ -22,7 +22,6 @@
           </v-layout>
         </v-container>
       </v-content>
-
     </v-container>
   </v-app>
 </template>

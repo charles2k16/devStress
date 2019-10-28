@@ -9,7 +9,7 @@
           </v-list-item-avatar>
 
           <v-list-item-content>
-            <v-list-item-title class="font-weight-bold">John Leider</v-list-item-title>
+            <v-list-item-title class="font-weight-bold">DevStress</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
 
@@ -36,12 +36,9 @@
     <v-app-bar app id="navBar" dark>
       <v-app-bar-nav-icon @click.stop="mini = !mini"></v-app-bar-nav-icon>
         <v-layout style="margin-top: 25px; width:100px;">
-          <!-- <v-text-field v-model="label" rounded solo clearable 
-            label="Search" height="30px;">
-          </v-text-field> -->
         </v-layout>
         <v-spacer></v-spacer>
-        <v-icon color="primary">mdi-bell-ring</v-icon>
+        <v-icon color="primary" class="mr-4">mdi-bell-ring</v-icon>
         <v-icon>mdi-account-arrow-right-outline</v-icon>
     </v-app-bar>
 
@@ -64,9 +61,9 @@ export default {
       'alex'
     ],
     links: [
-      { icon: 'mdi-view-dashboard', title: 'Dashboard', route: '/dashboard'},
+      { icon: 'mdi-view-dashboard', title: 'Dashboard', route: '/admin/dashboard'},
       { icon: 'mdi-file-document-box', title: 'Posts', route: '/admin/posts'},
-      { icon: 'mdi-file-document-box-multiple', title: 'Categories', route: '/admin/categories'},
+      { icon: 'mdi-file-document-box-multiple', title: 'Categories', route: '/categories'},
       { icon: 'mdi-account-group', title: 'Users', route: '/credit_reports' },
     ],
   }),

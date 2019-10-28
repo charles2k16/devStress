@@ -8,7 +8,6 @@ import CategoryPost from './components/CategoryPost'
 import Dashboard from './views/Dashboard'
 import PostsAdmin from './views/PostsAdmin'
 import Categories from './views/Categories'
-import Admin from './containers/AdminContainer'
 
 Vue.use(Router)
 
@@ -30,12 +29,14 @@ let routes = [
   },
   {
     path: '/admin',
-    redirect: '/dashboard',
+    redirect: '/admin/dashboard',
     name: 'Admin',
-    component: Admin,
+    component: {
+      render (c) { return c('router-view') }
+    },
     children: [
       {
-        path: '/dashboard',
+        path: '/admin/dashboard',
         name: 'Dashboard',
         component: Dashboard
       },
@@ -45,7 +46,7 @@ let routes = [
         component: PostsAdmin
       },
       {
-        path: '/admin/categories',
+        path: 'categories',
         name: 'Categories',
         component: Categories
       },
