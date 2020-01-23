@@ -19,7 +19,6 @@ class PostController extends Controller
     return ['posts' => $posts];
   }
 
-  
   /**
    * Store a newly created resource in storage.
    *

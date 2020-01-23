@@ -40,7 +40,7 @@
       </v-card-actions>
       <br><br>
       <div v-if="!checkComments">
-        <span>
+        <span class="ml-4">
           <v-bottom-sheet v-model="postCommentVisible" inset max-width="50%" scrollable>
             <template v-slot:activator="{ on }">
               <v-btn v-on="on">
@@ -63,6 +63,7 @@
         <span style="float:right" class="white--text mr-2">
           <h5>{{post.comments.length}} Comments</h5>
         </span>
+
         <!-- Comments Section -->
         <v-timeline dense v-for="comment in post.comments" :key="comment.id">
           <v-timeline-item>
